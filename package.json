@@ -1,0 +1,11 @@
+{
+  "name": "proyecto_healthy",
+  "version": "1.0.0",
+  "description": "Esta parte del proyecto se encarga de conectar el backend con los otros proyectos.\r Consiste de una API principal que envíe y reciba datos, y APIs individuales personalizadas para cada proyecto.\r ![img](./apis_healthy.drawio.png)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
