@@ -2,7 +2,7 @@ const http = require('http');
 //Recibo una reequest del back, envio una request a la api de conexion correspondiente, api de conexion envía al proyecto.
 //El proyecto responde, api de conexion responde y esta api responde al back.
 //Tipo de datos, que haria conexion, distintos archivos
-const receive_data = () => {
+export const receive_data = () => {
   received_data = "";
   const server = http.createServer((req, res) => {
     // Set the response HTTP header with HTTP status and Content type
@@ -16,7 +16,7 @@ const receive_data = () => {
 
 // Define the port number
 
-const listen = (port) => {
+export const listen = (port) => {
   server.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}/`);
   });
