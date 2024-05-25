@@ -1,19 +1,20 @@
-const http = require('http');
+const express = require('express');
+const app = express();
 
-// Create a server
-const server = http.createServer((req, res) => {
-  // Set the response HTTP header with HTTP status and Content type
-  res.writeHead(200, {'Content-Type': 'text/plain'});
-  
-  // Send the response body "Hello, World!"
-  res.end('Hello, World!\n');
-});
+// Middleware para parsear JSON
+app.use(express.json());
 
-// Define the port number
+// Define el número de puerto
 const port = 8000;
 
-// Start listening for connections on port 3000
-server.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}/`);
+// Define una ruta para la URL raíz ("/") con método POST
+app.post('/', async (req, res) => {
+  data = await req.body;
+  console.log(data);
+  res.send('Hello, World!\n');
 });
 
+// Inicia el servidor y escucha en el puerto definido
+app.listen(port, () => {
+  console.log(`Server is running on http://localhost:${port}/`);
+});
