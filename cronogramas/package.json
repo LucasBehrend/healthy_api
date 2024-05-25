@@ -1,9 +1,8 @@
 {
-  "name": "conexion_cronograma_api",
+  "name": "cronogramas",
   "version": "1.0.0",
   "description": "",
-  "main": "conexion_cronograma.js",
-  "type": "module",
+  "main": "cronogramas.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

@@ -5,7 +5,7 @@ class Requests {
     async sendRequest(body, options) {
         try {
             const url = `http://${options.hostname}:${options.port}${options.path}`;
-            const response = await axios.post(url, {body: body})
+            const response = await axios.post(url, body)
             console.log(`Status Code: ${response.status}`);
             console.log('Response Body:', response.data);
             return response.data;
