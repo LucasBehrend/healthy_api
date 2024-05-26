@@ -1,5 +1,4 @@
 import express from "express";
-import { receive_data, listen } from "./receive_data.js";
 import requests from "./receive_and_send_express.js";
 
 const app = express();

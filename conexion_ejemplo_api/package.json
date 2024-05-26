@@ -1,0 +1,11 @@
+{
+  "name": "conexion_ejemplo_api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "ejemplo.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
