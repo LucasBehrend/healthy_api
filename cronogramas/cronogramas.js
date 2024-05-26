@@ -11,7 +11,7 @@ const port = 6000;
 app.post('/', async (req, res) => {
   data = await req.body;
   console.log(data);
-  res.send(data);
+  res.send("ok");
 });
 
 // Inicia el servidor y escucha en el puerto definido
