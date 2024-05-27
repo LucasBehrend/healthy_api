@@ -10,7 +10,20 @@ const request = new requests();
 app.post('/', async (req, res) => {
     try {
         const receivedData = req.body;
-        const options = request.options("localhost", 8000, "/", "POST", {"Content-Type": "application/json"})
+        let port = null;
+        console.log(receivedData.value);
+        switch (receivedData.value)
+        {
+            case 0: 
+                port = 9000;
+                console.log(0);
+                break;
+            case 1: 
+                port = 8000;
+                console.log(1);
+                break;
+        }
+        const options = request.options("localhost", port, "/", "POST", {"Content-Type": "application/json"})
         const response = await request.sendRequest(receivedData, options);
         
         res.status(200);
