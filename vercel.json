@@ -25,7 +25,7 @@
     ],
     "routes": [
         {
-            "src": "/main_api/(.*)",
+            "src": "/(.*)",
             "dest": "main_api/__init__.js"
         },
         {
@@ -48,5 +48,7 @@
             "src": "/(.*)",
             "dest": "index.js"
         }
-    ]
+    ],
+    "buildCommand": "node main_api/__init__.js && node conexion_cronograma_api/conexion_cronograma.js && node cronogramas/cronogramas.js && node ejemplo_api/ejemplo.js && node conexion_ejemplo_api/conexion_ejemplo.js"
+
   }
