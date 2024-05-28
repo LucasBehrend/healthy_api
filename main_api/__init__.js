@@ -35,6 +35,9 @@ app.post('/', async (req, res) => {
         res.status(500).send('Error en el servidor');
       }
 });
+app.get('/', (req, res) =>
+    res.send("HOLA VERCEL"));
+
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}/`);
 });

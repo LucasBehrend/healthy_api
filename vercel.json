@@ -14,7 +14,7 @@
         "use": "@vercel/node"
       },
       {
-        "src": "ejemplo/ejemplo.js",
+        "src": "ejemplo_api/ejemplo.js",
         "use": "@vercel/node"
       },
       {
