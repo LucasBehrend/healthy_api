@@ -7,4 +7,4 @@ Content-Type: application/json
 
 ###
 
-GET http://healthy-back-8iqopemhe-martinacenedeses-projects.vercel.app/estudios
+GET https://healthy-back.vercel.app/estudios
