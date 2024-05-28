@@ -8,3 +8,10 @@ Content-Type: application/json
 ###
 
 GET https://healthy-back.vercel.app/estudios
+###
+POST healthy-api-amber.vercel.app/main
+Content-Type: application/json
+
+{ 
+    "value": 0   
+}   

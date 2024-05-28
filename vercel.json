@@ -43,6 +43,10 @@
         {
             "src": "/conexion-ejemplo/(.*)",
             "dest": "conexion_ejemplo_api/conexion_ejemplo.js"
+        },
+        {
+            "src": "/(.*)",
+            "dest": "index.js"
         }
     ]
   }
