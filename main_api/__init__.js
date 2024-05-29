@@ -11,7 +11,7 @@ app.post('/', async (req, res) => {
     try {
         const receivedData = req.body;
         let path = null;
-        const url =  "https://healthy-api-amber.vercel.app/"
+        const url =  "healthy-api-amber.vercel.app/"
         console.log(receivedData.value);
         switch (receivedData.value)
         {

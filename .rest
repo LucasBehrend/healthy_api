@@ -17,7 +17,7 @@ Content-Type: application/json
 }   
 
 ### 
-POST https://healthy-api-amber.vercel.app/conexion_cronograma
+POST https://healthy-api-amber.vercel.app/
 Content-Type: application/json
 
 { 
