@@ -11,8 +11,9 @@ const port = 9000;
 
 // Define una ruta para la URL raíz ("/") con método POST
 app.post('/', async (req, res) => {
+  const url =  "https://healthy-api-amber.vercel.app/"
   const receivedData = req.body;
-  const options = request.options("localhost", 5000, "/", "POST", {"Content-Type": "application/json"})
+  const options = request.options(url, "/ejemplo", "POST", {"Content-Type": "application/json"})
   const response = await request.sendRequest(receivedData, options);
   
   res.status(200);

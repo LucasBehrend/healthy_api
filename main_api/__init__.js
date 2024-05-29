@@ -10,20 +10,21 @@ const request = new requests();
 app.post('/', async (req, res) => {
     try {
         const receivedData = req.body;
-        let port = null;
+        let path = null;
+        const url =  "https://healthy-api-amber.vercel.app/"
         console.log(receivedData.value);
         switch (receivedData.value)
         {
             case 0: 
-                port = 9000;
+                path = "/conexion_ejemplo";
                 console.log(0);
                 break;
             case 1: 
-                port = 8000;
+                path = "/conexion_cronograma";
                 console.log(1);
                 break;
         }
-        const options = request.options("localhost", port, "/", "POST", {"Content-Type": "application/json"})
+        const options = request.options(url, path, "POST", {"Content-Type": "application/json"})
         const response = await request.sendRequest(receivedData, options);
         
         res.status(200);

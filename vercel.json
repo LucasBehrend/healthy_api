@@ -29,11 +29,11 @@
             "dest": "main_api/__init__.js"
         },
         {
-            "src": "/cronograma/(.*)",
+            "src": "/conexion_cronograma/(.*)",
             "dest": "conexion_cronograma_api/conexion_cronograma.js"
         },
         {
-            "src": "/cronogramas/(.*)",
+            "src": "/cronograma/(.*)",
             "dest": "cronogramas/cronogramas.js"
         },
         {
@@ -41,12 +41,8 @@
             "dest": "ejemplo/ejemplo.js"
         },
         {
-            "src": "/conexion-ejemplo/(.*)",
+            "src": "/conexion_ejemplo/(.*)",
             "dest": "conexion_ejemplo_api/conexion_ejemplo.js"
-        },
-        {
-            "src": "/(.*)",
-            "dest": "index.js"
         }
     ],
     "buildCommand": "node main_api/__init__.js && node conexion_cronograma_api/conexion_cronograma.js && node cronogramas/cronogramas.js && node ejemplo_api/ejemplo.js && node conexion_ejemplo_api/conexion_ejemplo.js"
