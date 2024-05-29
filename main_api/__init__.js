@@ -42,7 +42,4 @@ app.get('/', (req, res) =>
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}/`);
 });
-// const options = request.options("localhost", 8000, "/", "POST", JSON.stringify({'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(data)}));
-// console.log("2");
-// const send_request_to_connection = request.send_request(data, options);
-// console.log("3");
+module.exports = app;
