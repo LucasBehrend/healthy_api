@@ -17,11 +17,11 @@ app.post('/', async (req, res) => {
         switch (receivedData.value)
         {
             case 0: 
-                path = "conexion_ejemplo";
+                path = "conexion_ejemplo/";
                 console.log(0);
                 break;
             case 1: 
-                path = "conexion_cronograma";
+                path = "conexion_cronograma/";
                 console.log(1);
                 break;
         }
