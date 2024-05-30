@@ -8,6 +8,7 @@ const port = 3000;
 const request = new requests();
 
 app.post('/', async (req, res) => {
+
     try {
         const receivedData = req.body;
         let path = null;
@@ -16,11 +17,11 @@ app.post('/', async (req, res) => {
         switch (receivedData.value)
         {
             case 0: 
-                path = "/conexion_ejemplo";
+                path = "conexion_ejemplo";
                 console.log(0);
                 break;
             case 1: 
-                path = "/conexion_cronograma";
+                path = "conexion_cronograma";
                 console.log(1);
                 break;
         }
@@ -34,7 +35,7 @@ app.post('/', async (req, res) => {
     catch (error) {
         console.error('Error al procesar la solicitud:', error);
         res.status(500).send('Error en el servidor');
-      }
+    }
 });
 app.get('/', (req, res) =>
     res.send("HOLA VERCEL"));

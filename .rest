@@ -9,7 +9,7 @@ Content-Type: application/json
 
 GET https://healthy-back.vercel.app/estudios
 ###
-POST healthy-api-amber.vercel.app/main_api
+POST healthy-api-amber.vercel.app/main
 Content-Type: application/json
 
 { 
@@ -17,9 +17,12 @@ Content-Type: application/json
 }   
 
 ### 
-POST https://healthy-api-amber.vercel.app/
+POST https://healthy-api-amber.vercel.app
 Content-Type: application/json
 
 { 
     "value": 0   
 }   
+
+###
+GET https://healthy-api-amber.vercel.app
