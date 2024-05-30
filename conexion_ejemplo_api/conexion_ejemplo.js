@@ -1,19 +1,4 @@
 import express from 'express';
-<<<<<<< HEAD
-const app = express();
-app.use(express.json());
-
-app.post('/', async (req, res) => {
-  const receivedData = req.body;
-  console.log("Llego")
-  res.status(200);
-  res.send("Se recibió la request.");
-});
-// Define the port number
-const port = 8000;
-
-// Start listening for connections on port 3000
-=======
 import Requests from '../main_api/receive_and_send_express.js';
 
 const app = express();
@@ -22,14 +7,14 @@ const request = new Requests();
 app.use(express.json());
 
 // Define el número de puerto
-const port = 8000;
-console.log("conexion crono");
+const port = 9000;
+console.log("conexion ejemplo");
 // Define una ruta para la URL raíz ("/") con método POST
 app.post('/', async (req, res) => {
-  console.log("post cc");
+  console.log("post ce");
   const url =  "healthy-api-amber.vercel.app/"
   const receivedData = req.body;
-  const options = request.options(url, "cronograma", "POST", {"Content-Type": "application/json"})
+  const options = request.options(url, "ejemplo", "POST", {"Content-Type": "application/json"})
   const response = await request.sendRequest(receivedData, options);
   
   res.status(200);
@@ -38,7 +23,6 @@ app.post('/', async (req, res) => {
 });
 
 // Inicia el servidor y escucha en el puerto definido
->>>>>>> 37b6796030741178424a16ba1bd6ad975ee91f8b
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}/`);
 });
