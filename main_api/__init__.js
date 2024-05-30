@@ -13,7 +13,7 @@ app.post('/', async (req, res) => {
         const receivedData = req.body;
         let path = null;
         const url =  "healthy-api-amber.vercel.app/"
-        console.log(receivedData.value);
+        res.send(receivedData.value);
         switch (receivedData.value)
         {
             case 0: 
