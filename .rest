@@ -1,13 +1,6 @@
 POST http://localhost:3000/ http/1.1
 Content-Type: application/json
 
-<<<<<<< HEAD
-{
-    "value": 1    
-}
-###
-POST healthy-api-amber.vercel.app
-=======
 { 
     "value": 0   
 }   
@@ -33,4 +26,10 @@ Content-Type: application/json
 
 ###
 GET https://healthy-api-amber.vercel.app
->>>>>>> 37b6796030741178424a16ba1bd6ad975ee91f8b
+###
+POST healthy-13cgurkke-lucasbehrends-projects.vercel.app/
+Content-Type: application/json
+
+{ 
+    "value": 0   
+}   
