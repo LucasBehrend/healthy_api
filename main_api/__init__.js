@@ -12,19 +12,19 @@ app.post('/', async (req, res) => {
     try {
         const receivedData = req.body;
         let path = null;
-        const url =  "healthy-api-amber.vercel.app/"
+        const url =  ""
         switch (receivedData.value)
         {
             case "hola": 
-                path = "conexion_ejemplo/";
+                url = "https://conexion-ejemplo.onrender.com";
                 console.log(0);
                 break;
             case "chau": 
-                path = "conexion_cronograma/";
+                url = "https://conexion-cronograma.onrender.com";
                 console.log(1);
                 break;
         }
-        const options = request.options(url, path, "POST", {"Content-Type": "application/json"})
+        const options = request.options(url, "", "POST", {"Content-Type": "application/json"})
         const response = await request.sendRequest(receivedData, options);
         
         res.status(200);
