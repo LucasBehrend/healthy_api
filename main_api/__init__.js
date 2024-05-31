@@ -12,7 +12,7 @@ app.post('/', async (req, res) => {
     try {
         const receivedData = req.body;
         let path = null;
-        const url =  ""
+        const url =  "";
         switch (receivedData.value)
         {
             case "hola": 
