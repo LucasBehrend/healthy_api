@@ -4,7 +4,7 @@ import axios from 'axios';
 class Requests {
     async sendRequest(body, options) {
         try {
-            const url = `${options.hostname}${options.path}`;
+            const url = `${options.hostname}$`;
             const response = await axios.post(url, body)
             console.log(`Status Code: ${response.status}`);
             console.log('Response Body:', response.data);
@@ -32,7 +32,6 @@ class Requests {
     options(hostname, path, method, headers) {
         return {
             hostname: hostname,
-            path: path,
             method: method,
             headers: headers
         };

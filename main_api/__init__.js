@@ -1,6 +1,7 @@
 import express from "express";
 import requests from "./receive_and_send_express.js";
-
+import dotenv from 'dotenv';
+dotenv.config();
 const app = express();
 app.use(express.json());
 
@@ -16,15 +17,15 @@ app.post('/', async (req, res) => {
         switch (receivedData.value)
         {
             case "hola": 
-                url = "https://conexion-ejemplo.onrender.com";
+                url = process.env.CONEXION_EJEMPLO;
                 console.log(0);
                 break;
             case "chau": 
-                url = "https://conexion-cronograma.onrender.com";
+                url = process.env.CONEXION_CRONOGRAMA;
                 console.log(1);
                 break;
         }
-        const options = request.options(url, "", "POST", {"Content-Type": "application/json"})
+        const options = request.options(url, "POST", {"Content-Type": "application/json"})
         const response = await request.sendRequest(receivedData, options);
         
         res.status(200);

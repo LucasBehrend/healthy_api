@@ -12,7 +12,7 @@ console.log("conexion crono");
 // Define una ruta para la URL raíz ("/") con método POST
 app.post('/', async (req, res) => {
   console.log("post cc");
-  const url =  "https://cronogramas-v2m8.onrender.com";
+  const url =  process.env.CRONOGRAMA;
   const receivedData = req.body;
   const options = request.options(url, "", "POST", {"Content-Type": "application/json"})
   const response = await request.sendRequest(receivedData, options);
