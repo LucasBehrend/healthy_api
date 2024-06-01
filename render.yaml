@@ -1,0 +1,40 @@
+services:
+  - type: web
+    name: main
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: node main_api/__init__.js
+    branch: master
+
+  - type: web
+    name: conexion_cronograma
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: node conexion_cronograma/conexion_cronograma.js
+    branch: master
+ 
+  - type: web
+    name: cronogramas
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: node cronogramas/cronogramas.js
+    branch: master
+
+  - type: web
+    name: conexion_ejemplo
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: node conexion_ejemplo/conexion_ejemplo.js
+    branch: master
+
+  - type: web
+    name: ejemplo
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: node ejemplo_api/ejemplo.js
+    branch: master

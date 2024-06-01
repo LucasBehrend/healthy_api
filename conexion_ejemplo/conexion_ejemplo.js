@@ -12,7 +12,7 @@ console.log("conexion ejemplo");
 // Define una ruta para la URL raíz ("/") con método POST
 app.post('/', async (req, res) => {
   console.log("post ce");
-  const url =  "healthy-api-amber.vercel.app/"
+  const url =  "https://ejemplo-n0de.onrender.com"
   const receivedData = req.body;
   const options = request.options(url, "ejemplo", "POST", {"Content-Type": "application/json"})
   const response = await request.sendRequest(receivedData, options);
@@ -26,4 +26,4 @@ app.post('/', async (req, res) => {
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}/`);
 });
-module.exports = app;
+export default app;

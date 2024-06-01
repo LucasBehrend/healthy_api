@@ -9,9 +9,9 @@ const port = 6000;
 
 // Define una ruta para la URL raíz ("/") con método POST
 app.post('/', async (req, res) => {
-  data = await req.body;
+  let data = await req.body;
   console.log(data);
-  res.send("ok");
+  res.send("cronograma");
 });
 
 // Inicia el servidor y escucha en el puerto definido

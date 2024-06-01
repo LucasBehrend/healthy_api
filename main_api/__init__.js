@@ -8,24 +8,23 @@ const port = 3000;
 const request = new requests();
 
 app.post('/', async (req, res) => {
-
+    console.log("Post");
     try {
         const receivedData = req.body;
         let path = null;
-        const url =  "healthy-api-amber.vercel.app/"
-        console.log(receivedData.value);
+        let url =  "";
         switch (receivedData.value)
         {
-            case 0: 
-                path = "conexion_ejemplo";
+            case "hola": 
+                url = "https://conexion-ejemplo.onrender.com";
                 console.log(0);
                 break;
-            case 1: 
-                path = "conexion_cronograma";
+            case "chau": 
+                url = "https://conexion-cronograma.onrender.com";
                 console.log(1);
                 break;
         }
-        const options = request.options(url, path, "POST", {"Content-Type": "application/json"})
+        const options = request.options(url, "", "POST", {"Content-Type": "application/json"})
         const response = await request.sendRequest(receivedData, options);
         
         res.status(200);
@@ -36,9 +35,11 @@ app.post('/', async (req, res) => {
         console.error('Error al procesar la solicitud:', error);
         res.status(500).send('Error en el servidor');
     }
+}) 
+app.get('/', (req, res) => {
+    console.log("get");
+    res.send("HOLA VERCEL")
 });
-app.get('/', (req, res) =>
-    res.send("HOLA VERCEL"));
 
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}/`);

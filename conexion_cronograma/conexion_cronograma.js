@@ -12,9 +12,9 @@ console.log("conexion crono");
 // Define una ruta para la URL raíz ("/") con método POST
 app.post('/', async (req, res) => {
   console.log("post cc");
-  const url =  "healthy-api-amber.vercel.app/"
+  const url =  "https://cronogramas-v2m8.onrender.com";
   const receivedData = req.body;
-  const options = request.options(url, "cronograma", "POST", {"Content-Type": "application/json"})
+  const options = request.options(url, "", "POST", {"Content-Type": "application/json"})
   const response = await request.sendRequest(receivedData, options);
   
   res.status(200);
@@ -26,4 +26,4 @@ app.post('/', async (req, res) => {
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}/`);
 });
-module.exports = app;
+export default app;

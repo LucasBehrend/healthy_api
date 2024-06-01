@@ -25,4 +25,11 @@ Content-Type: application/json
 }   
 
 ###
-GET https://healthy-api-amber.vercel.app
+GET https://main-lahv.onrender.com
+### 
+POST https://main-lahv.onrender.com
+Content-Type: application/json
+
+{ 
+    "value": "hola"
+}   
