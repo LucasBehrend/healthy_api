@@ -11,7 +11,20 @@ class Requests {
             return response.data;
         } 
         catch (error) {
-            console.error('Error:', error);
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.error('Error Response Status:', error.response.status);
+                console.error('Error Response Headers:', error.response.headers);
+                console.error('Error Response Data:', error.response.data);
+            } else if (error.request) {
+                // The request was made but no response was received
+                console.error('Error Request:', error.request);
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.error('Error Message:', error.message);
+            }
+            console.error('Error Config:', error.config);
             throw error;
         }
     }
