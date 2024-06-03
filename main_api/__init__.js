@@ -18,7 +18,7 @@ app.post('/', async (req, res) => {
         {
             case "hola": 
                 url = process.env.CONEXION_EJEMPLO;
-                console.log(0);
+                console.log(url);
                 break;
             case "chau": 
                 url = process.env.CONEXION_CRONOGRAMA;

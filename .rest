@@ -5,25 +5,6 @@ Content-Type: application/json
     "value": "hola"  
 }   
 
-### 
-
-GET https://healthy-back.vercel.app/estudios
-###
-POST healthy-api-amber.vercel.app/main
-Content-Type: application/json
-
-{ 
-    "value": 0   
-}   
-
-###  
-POST https://healthy-api-amber.vercel.app
-Content-Type: application/json
-
-{ 
-    "value": 0   
-}   
-
 ###
 GET https://main-lahv.onrender.com
 ### 
