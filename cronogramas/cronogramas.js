@@ -1,4 +1,4 @@
-const express = require('express');
+import express from 'express'
 const app = express();
 
 // Middleware para parsear JSON
@@ -9,13 +9,13 @@ const port = 6000;
 
 // Define una ruta para la URL raíz ("/") con método POST
 app.post('/', async (req, res) => {
-  let data = await req.body;
+  let data = req.body;
   console.log(data);
-  res.send("cronograma");
+  res.send(data);
 });
 
 // Inicia el servidor y escucha en el puerto definido
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}/`);
 });
-module.exports = app;
+export default app;

@@ -7,7 +7,7 @@ app.use(express.json());
 
 const port = 3000;
 const request = new requests();
-
+console.log("init");
 app.post('/', async (req, res) => {
     console.log("Post");
     try {
@@ -16,11 +16,11 @@ app.post('/', async (req, res) => {
         let url =  "";
         switch (receivedData.value)
         {
-            case "hola": 
+            case "ejemplo": 
                 url = process.env.CONEXION_EJEMPLO;
                 console.log(url);
                 break;
-            case "chau": 
+            case "turno": 
                 url = process.env.CONEXION_CRONOGRAMA;
                 console.log(1);
                 break;

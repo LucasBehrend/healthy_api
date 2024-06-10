@@ -2,8 +2,21 @@ POST http://localhost:3000/ http/1.1
 Content-Type: application/json
 
 { 
-    "value": "hola"  
+    "value": "turno",  
+    "turnos":[
+        {
+        "paciente": "Lucas",
+        "medico": "jose",
+        "fecha": "24-01-2023"
+        },
+        {
+        "paciente": "Lucas",
+        "medico": "pedro",
+        "fecha": "25-01-2024"
+        }
+    ]
 }   
+
 
 ###
 GET https://main-lahv.onrender.com
@@ -12,5 +25,5 @@ POST https://main-lahv.onrender.com
 Content-Type: application/json
 
 { 
-    "value": "hola"
+    "value": "chau"
 }   

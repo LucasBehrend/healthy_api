@@ -1,4 +1,4 @@
-const express = require('express');
+import express from 'express'
 const app = express();
 
 // Middleware para parsear JSON
@@ -18,4 +18,4 @@ app.post('/', async (req, res) => {
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}/`);
 });
-module.exports = app;
+export default app;

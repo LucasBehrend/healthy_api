@@ -11,11 +11,14 @@ const port = 8000;
 console.log("conexion crono");
 // Define una ruta para la URL raíz ("/") con método POST
 app.post('/', async (req, res) => {
-  console.log("post cc");
+  let turnos = [];
+  let data = req.body;
   const url =  process.env.CRONOGRAMA;
-  const receivedData = req.body;
+  Object.values(data.turnos).forEach(turno => {
+    turnos.push([turno.paciente,turno.medico, turno.fecha]);
+  });
   const options = request.options(url, "", "POST", {"Content-Type": "application/json"})
-  const response = await request.sendRequest(receivedData, options);
+  const response = await request.sendRequest(turnos, options);
   
   res.status(200);
   console.log("esto es 2", response);
