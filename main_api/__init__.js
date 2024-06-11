@@ -37,7 +37,7 @@ app.post('/', async (req, res) => {
         res.status(500).send('Error en el servidor');
     }
 }) 
-app.get('/', (req, res) => {
+app.get('/turnos', (req, res) => {
     console.log("get");
     res.send("HOLA VERCEL")
 });
