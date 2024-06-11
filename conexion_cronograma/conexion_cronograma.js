@@ -15,7 +15,7 @@ app.post('/', async (req, res) => {
   let data = req.body;
   const url =  process.env.CRONOGRAMA;
   Object.values(data.turnos).forEach(turno => {
-    turnos.push([turno.paciente,turno.medico, turno.fecha]);
+    turnos.push({paciente: turno.paciente,medico: turno.medico, fecha: turno.fecha, hora: turno.hora});
   });
   const options = request.options(url, "", "POST", {"Content-Type": "application/json"})
   const response = await request.sendRequest(turnos, options);
