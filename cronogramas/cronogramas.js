@@ -1,8 +1,17 @@
 import express from 'express'
 import fs from 'fs'
 import { createObjectCsvWriter } from 'csv-writer';
+import { MongoClient, ServerApiVersion } from 'mongodb'
 const app = express();
 
+const uri = "mongodb+srv://lucasbehrend2006:lucas2006@turnos-medicos-healthy.hs0fzoa.mongodb.net/?retryWrites=true&w=majority&appName=turnos-medicos-healthy";
+const client = new MongoClient(uri, {
+  serverApi: {
+    version: ServerApiVersion.v1,
+    strict: true,
+    deprecationErrors: true,
+  }
+});
 // Middleware para parsear JSON
 app.use(express.json());
 
@@ -23,7 +32,13 @@ const csvWriter = createObjectCsvWriter({
 // Define una ruta para la URL raíz ("/") con método POST
 app.post('/', async (req, res) => {
   let data = req.body;
-  await csvWriter.writeRecords(data);
+  try {
+    await client.connect();
+    const db = client.db("sample_guides");
+    const coll = db.collection("turnos");
+    const result = await coll.insertMany(docs);
+  }
+  catch{}
   res.send('Turno añadido.');
 });
 
