@@ -38,8 +38,8 @@ app.post('/', async (req, res) => {
     }
 }) 
 app.get('/turnos', (req, res) => {
-    console.log("get");
-    res.send("HOLA VERCEL")
+    //completar para hacer un get a conexion_cronogramas
+    const options = request.options()
 });
 
 app.listen(port, () => {

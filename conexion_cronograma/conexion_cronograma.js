@@ -24,6 +24,7 @@ app.post('/', async (req, res) => {
   console.log("esto es 2", response);
   res.send(response);
 });
+// endpoint get para recibir turnos, enviar parametros en la ruta 
 
 // Inicia el servidor y escucha en el puerto definido
 app.listen(port, () => {

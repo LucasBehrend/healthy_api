@@ -22,6 +22,8 @@ app.post('/', async (req, res) => {
   res.send(response);
 });
 
+
+
 // Inicia el servidor y escucha en el puerto definido
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}/`);

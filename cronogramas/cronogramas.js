@@ -18,17 +18,6 @@ app.use(express.json());
 // Define el número de puerto
 const port = 6000;
 
-const path_csv = "cronogramas/turnos.csv";
-const csvWriter = createObjectCsvWriter({
-  path: path_csv,
-  header: [
-      { id: 'paciente', title: 'Paciente' },
-      { id: 'medico', title: 'Medico' },
-      { id: 'fecha', title: 'Fecha' },
-      { id: 'hora', title: 'Hora' }
-  ],
-  append: true // Añadir registros sin sobrescribir
-});
 // Define una ruta para la URL raíz ("/") con método POST
 app.post('/', async (req, res) => {
   let data = req.body;
@@ -36,12 +25,20 @@ app.post('/', async (req, res) => {
     await client.connect();
     const db = client.db("sample_guides");
     const coll = db.collection("turnos");
-    const result = await coll.insertMany(docs);
+    await coll.insertMany(data);
   }
-  catch{}
+  catch (error){
+    console.log("Error: ", error.message);
+  }
   res.send('Turno añadido.');
 });
 
+app.get('/', async (req, res) => {
+  const db = client.db("sample_guides");
+  const coll = db.collection("turnos");
+  const results = await coll.find();
+  res.send(results);
+})
 // Inicia el servidor y escucha en el puerto definido
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}/`);
