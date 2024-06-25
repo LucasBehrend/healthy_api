@@ -15,7 +15,7 @@ app.post('/', async (req, res) => {
   const url =  process.env.EJEMPLO;
   const receivedData = req.body;
   const options = request.options(url, "ejemplo", "POST", {"Content-Type": "application/json"})
-  const response = await request.sendRequest(receivedData, options);
+  const response = await request.sendPostRequest(receivedData, options);
   
   res.status(200);
   console.log("esto es 2", response);

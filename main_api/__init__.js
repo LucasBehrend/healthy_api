@@ -9,6 +9,7 @@ const port = 3000;
 const request = new requests();
 console.log("init");
 app.post('/', async (req, res) => {
+    //Revisar si es mejor dos rutas o el switch
     console.log("Post");
     try {
         const receivedData = req.body;
@@ -26,7 +27,7 @@ app.post('/', async (req, res) => {
                 break;
         }
         const options = request.options(url, "POST", {"Content-Type": "application/json"})
-        const response = await request.sendRequest(receivedData, options);
+        const response = await request.sendPostRequest(receivedData, options);
         
         res.status(200);
         console.log("esto es ", response);
@@ -38,8 +39,9 @@ app.post('/', async (req, res) => {
     }
 }) 
 app.get('/turnos', (req, res) => {
+    const url = process.env.CONEXION_CRONOGRAMA;
     //completar para hacer un get a conexion_cronogramas
-    const options = request.options()
+    const options = request.options(url,)
 });
 
 app.listen(port, () => {

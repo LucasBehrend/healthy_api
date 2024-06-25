@@ -2,7 +2,7 @@ import express from 'express';
 import axios from 'axios';
 
 class Requests {
-    async sendRequest(body, options) {
+    async sendPostRequest(body, options) {
         try {
             const url = `${options.hostname}`;
             const response = await axios.post(url, body)
@@ -27,6 +27,13 @@ class Requests {
             console.error('Error Config:', error.config);
             throw error;
         }
+    }
+    async sendGetRequest (path){
+        axios.get(path).then(function (response){
+            return response;
+        }).catch(function (error){
+            return error;
+        });
     }
 
     options(hostname, method, headers) {
