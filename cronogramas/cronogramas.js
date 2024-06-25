@@ -33,10 +33,11 @@ app.post('/', async (req, res) => {
   res.send('Turno añadido.');
 });
 
-app.get('/', async (req, res) => {
+app.get('/:paciente', async (req, res) => {
+  const paciente = req.params.paciente;
   const db = client.db("sample_guides");
   const coll = db.collection("turnos");
-  const results = await coll.find();
+  const results = await coll.find().toArray();
   res.send(results);
 })
 // Inicia el servidor y escucha en el puerto definido
