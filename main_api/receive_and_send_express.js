@@ -29,7 +29,7 @@ class Requests {
         }
     }
     async sendGetRequest (path){
-        axios.get(path).then(function (response){
+        await axios.get(path).then(function (response){
             return response;
         }).catch(function (error){
             return error;
@@ -44,19 +44,7 @@ class Requests {
         };
     }
 
-    async receive_data(port, options) {
-        const app = express();
-        app.use(express.json()); // Middleware to parse JSON bodies
 
-        // app.post('/', async (req, res) => {
-        //     const receivedData = req.body;
-        //     res.status(200);
-        //     res.send("Se recibió la request.");
-        //     console.log(receivedData);
-        //     console.log("receive data")
-        // });
-
-    }
     listen(port)
     {
         app.listen(port, () => {

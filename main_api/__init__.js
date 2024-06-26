@@ -38,10 +38,18 @@ app.post('/', async (req, res) => {
         res.status(500).send('Error en el servidor');
     }
 }) 
-app.get('/turnos', (req, res) => {
-    const url = process.env.CONEXION_CRONOGRAMA;
-    //completar para hacer un get a conexion_cronogramas
-    const options = request.options(url,)
+app.get('/turnos/:paciente', async (req, res) => {
+    const url = process.env.CONEXION_CRONOGRAMA + 'turnos/';
+    const paciente = req.params.paciente;
+    const path = url + paciente;
+    console.log(path);
+    try{
+        const response = await request.sendGetRequest(path);
+        res.send(response);
+    }
+    catch (error){
+        console.log(error.message);
+    }
 });
 
 app.listen(port, () => {

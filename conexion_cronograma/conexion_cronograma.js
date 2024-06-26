@@ -25,10 +25,19 @@ app.post('/', async (req, res) => {
   res.send(response);
 });
 // endpoint get para recibir turnos, enviar parametros en la ruta 
-app.get('turnos', async (req,res) => {
-  const options = request.options(url, "", "GET");
-  const response = await request.sendPostRequest()
-
+app.get('/turnos/:paciente', async (req,res) => {
+  console.log("ok");
+  const paciente = req.params.paciente;
+  const path = url + paciente;
+  console.log(path, url + paciente);
+  try{
+    const response = await request.sendGetRequest(path);
+    console.log(response);
+    res.send(response);
+  }
+  catch (error){
+    console.log(error.message);
+  }
 })
 // Inicia el servidor y escucha en el puerto definido
 app.listen(port, () => {

@@ -29,3 +29,6 @@ Content-Type: application/json
 { 
     "value": "chau"
 }   
+
+### 
+GET http://localhost:6000/Lucas
