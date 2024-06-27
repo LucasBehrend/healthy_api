@@ -29,11 +29,12 @@ class Requests {
         }
     }
     async sendGetRequest (path){
-        await axios.get(path).then(function (response){
-            return response;
-        }).catch(function (error){
+        try {
+            const response = await axios.get(path)
+            return response.data;
+        } catch(error){
             return error;
-        });
+        }
     }
 
     options(hostname, method, headers) {
