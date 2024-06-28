@@ -31,4 +31,4 @@ Content-Type: application/json
 }   
 
 ### 
-GET http://localhost:6000/Lucas
+GET http://localhost:3000/turnos/Lucas

@@ -8,29 +8,13 @@ app.use(express.json());
 const port = 3000;
 const request = new requests();
 console.log("init");
-app.post('/', async (req, res) => {
-    //Revisar si es mejor dos rutas o el switch
-    console.log("Post");
+app.post('/turnos', async (req, res) => {
+    //Arreglar
     try {
-        const receivedData = req.body;
-        let path = null;
-        let url =  "";
-        switch (receivedData.value)
-        {
-            case "ejemplo": 
-                url = process.env.CONEXION_EJEMPLO;
-                console.log(url);
-                break;
-            case "turno": 
-                url = process.env.CONEXION_CRONOGRAMA;
-                console.log(1);
-                break;
-        }
+        const url = process.env.CONEXION_EJEMPLO;
         const options = request.options(url, "POST", {"Content-Type": "application/json"})
-        const response = await request.sendPostRequest(receivedData, options);
-        
+        const response = await request.sendPostRequest(req.body.turnos, options);
         res.status(200);
-        console.log("esto es ", response);
         res.send(response);
     }
     catch (error) {
@@ -38,6 +22,20 @@ app.post('/', async (req, res) => {
         res.status(500).send('Error en el servidor');
     }
 }) 
+app.post('/ejemplo', async (req,res) => {
+    try{
+        const receivedData = req.body;
+        const url = process.env.CONEXION_EJEMPLO;
+        const options = request.options(url, "POST", {"Content-Type": "application/json"});
+        const response = await request.sendPostRequest(receivedData, options);
+        res.send(response).status(200);
+    }catch(error){
+        console.error('Error al procesar la solicitud:', error);
+        res.status(500).send('Error en el servidor');
+    }
+    
+
+})
 app.get('/turnos/:paciente', async (req, res) => {
     const url = process.env.CONEXION_CRONOGRAMA + 'turnos/';
     const paciente = req.params.paciente;
