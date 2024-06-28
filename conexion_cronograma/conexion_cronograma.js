@@ -14,11 +14,12 @@ const url =  process.env.CRONOGRAMA;
 app.post('/', async (req, res) => {
   let turnos = [];
   let data = req.body;
-  Object.values(data.turnos).forEach(turno => {
+  console.log(data);
+  data.forEach(turno => {
     turnos.push({paciente: turno.paciente,medico: turno.medico, fecha: turno.fecha, hora: turno.hora});
   });
   const options = request.options(url, "", "POST", {"Content-Type": "application/json"})
-  const response = await request.sendRequest(turnos, options);
+  const response = await request.sendPostRequest(turnos, options);
   
   res.status(200);
   console.log("esto es 2", response);

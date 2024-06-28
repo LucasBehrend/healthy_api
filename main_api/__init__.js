@@ -11,7 +11,7 @@ console.log("init");
 app.post('/turnos', async (req, res) => {
     //Arreglar
     try {
-        const url = process.env.CONEXION_EJEMPLO;
+        const url = process.env.CONEXION_CRONOGRAMA;
         const options = request.options(url, "POST", {"Content-Type": "application/json"})
         const response = await request.sendPostRequest(req.body.turnos, options);
         res.status(200);
