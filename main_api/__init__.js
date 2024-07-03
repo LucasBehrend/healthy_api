@@ -3,7 +3,6 @@ import requests from "./receive_and_send_express.js";
 import dotenv from 'dotenv';
 import cors from 'cors';
 
-app.set("trust proxy", 1);
 dotenv.config();
 const app = express();
 app.use(cors({
@@ -11,10 +10,11 @@ app.use(cors({
     methods: ['POST', 'PUT', 'GET', 'DELETE', 'OPTIONS', 'HEAD'],
     credentials: true,
     allowedHeaders: '*'
-
+    
 })
 );
 app.use(express.json());
+app.set("trust proxy", 1);
 
 const port = 3000;
 const request = new requests();
