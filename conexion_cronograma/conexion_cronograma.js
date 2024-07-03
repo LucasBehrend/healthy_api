@@ -24,9 +24,8 @@ app.post('/', async (req, res) => {
   let turnos = [];
   let data = req.body;
   console.log(data);
-  data.forEach(turno => {
-    turnos.push({paciente: turno.paciente,medico: turno.medico, fecha: turno.fecha, hora: turno.hora});
-  });
+  turnos.push({paciente: turno.paciente,medico: turno.medico, fecha: turno.fecha, hora: turno.hora});
+
   const options = request.options(url, "", "POST", {"Content-Type": "application/json"})
   const response = await request.sendPostRequest(turnos, options);
   
