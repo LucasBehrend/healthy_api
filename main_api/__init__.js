@@ -1,6 +1,17 @@
 import express from "express";
 import requests from "./receive_and_send_express.js";
 import dotenv from 'dotenv';
+import cors from 'cors';
+
+app.use(cors({
+    origin: "*",
+    methods: ['POST', 'PUT', 'GET', 'DELETE', 'OPTIONS', 'HEAD'],
+    credentials: true,
+    allowedHeaders: '*'
+
+})
+);
+app.set("trust proxy", 1);
 dotenv.config();
 const app = express();
 app.use(express.json());

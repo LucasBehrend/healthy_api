@@ -2,6 +2,16 @@ import express from 'express'
 import fs from 'fs'
 import { MongoClient, ServerApiVersion } from 'mongodb'
 const app = express();
+import cors from 'cors';
+
+app.use(cors({
+    origin: "*",
+    methods: ['POST', 'PUT', 'GET', 'DELETE', 'OPTIONS', 'HEAD'],
+    credentials: true,
+    allowedHeaders: '*'
+
+})
+);
 
 const uri = "mongodb+srv://lucasbehrend2006:lucas2006@turnos-medicos-healthy.hs0fzoa.mongodb.net/?retryWrites=true&w=majority&appName=turnos-medicos-healthy";
 const client = new MongoClient(uri, {

@@ -1,6 +1,15 @@
 import express from 'express';
 import Requests from '../main_api/receive_and_send_express.js';
+import cors from 'cors';
 
+app.use(cors({
+    origin: "*",
+    methods: ['POST', 'PUT', 'GET', 'DELETE', 'OPTIONS', 'HEAD'],
+    credentials: true,
+    allowedHeaders: '*'
+
+})
+);
 const app = express();
 const request = new Requests();
 // Middleware para parsear JSON
