@@ -13,7 +13,7 @@ Content-Type: application/json
 ###
 GET https://main-lahv.onrender.com
 ### 
-GET http://healthy-back.vercel.app/turnos/Lucas
+GET http://healthy-back.vercel.app/turnos/Lucas 
 ###
 GET http://main-lahv.onrender.com/turnos/Lucas
 ###

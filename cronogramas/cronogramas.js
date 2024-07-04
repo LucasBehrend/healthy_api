@@ -48,9 +48,14 @@ app.get('/:paciente', async (req, res) => {
   const paciente = req.params.paciente;
   const db = client.db("sample_guides");
   const coll = db.collection("turnos");
-  const results = await coll.find().toArray();
-  console.log(results);
-  res.send(results);
+  try{
+    const results = await coll.find().toArray();
+    console.log(results);
+    res.send(results);
+  }
+  catch (error){
+    console.log("Error geteando de la db: ", error);
+  }
 })
 // Inicia el servidor y escucha en el puerto definido
 app.listen(port, () => {
