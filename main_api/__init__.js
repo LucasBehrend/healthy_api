@@ -13,8 +13,8 @@ app.use(cors({
     
 })
 );
-app.use(express.json());
 app.set("trust proxy", 1);
+app.use(express.json());
 
 const port = 3000;
 const request = new requests();
