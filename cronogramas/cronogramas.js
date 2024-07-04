@@ -49,6 +49,7 @@ app.get('/:paciente', async (req, res) => {
   const db = client.db("sample_guides");
   const coll = db.collection("turnos");
   try{
+    console.log("try results");
     const results = await coll.find().toArray();
     console.log(results);
     res.send(results);
