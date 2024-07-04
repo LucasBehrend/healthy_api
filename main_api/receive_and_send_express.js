@@ -5,7 +5,7 @@ class Requests {
     async sendPostRequest(body, options) {
         try {
             const url = `${options.hostname}`;
-            const response = await axios.post(url, body)
+            const response = await axios.post(url, body, {validateStatus: (status) => { return status >= 200 }})
             console.log(`Status Code: ${response.status}`);
             console.log('Response Body:', response.data);
             return response.data;
