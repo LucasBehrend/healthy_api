@@ -24,6 +24,7 @@ app.post('/turnos', async (req, res) => {
         const url = process.env.CONEXION_CRONOGRAMA;
         const options = request.options(url, "POST", {"Content-Type": "application/json"})
         const response = await request.sendPostRequest(req.body.turnos, options);
+        console.log(response);
         res.status(200);
         return res.send(response);
     }
@@ -46,10 +47,10 @@ app.post('/ejemplo', async (req,res) => {
     
 
 })
-app.get('/turnos/:paciente', async (req, res) => {
+app.get('/turnos', async (req, res) => {
     const url = process.env.CONEXION_CRONOGRAMA + 'turnos/';
-    const paciente = req.params.paciente;
-    const path = url + paciente;
+    // const paciente = req.params.paciente;
+    const path = url;
     console.log(path);
     try{
         const response = await request.sendGetRequest(path);

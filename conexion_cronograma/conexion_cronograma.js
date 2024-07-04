@@ -34,11 +34,11 @@ app.post('/', async (req, res) => {
   return res.send(response);
 });
 // endpoint get para recibir turnos, enviar parametros en la ruta 
-app.get('/turnos/:paciente', async (req,res) => {
+app.get('/turnos', async (req,res) => {
   console.log("ok");
-  const paciente = req.params.paciente;
-  const path = url + paciente;
-  console.log(path, url + paciente);
+  // const paciente = req.params.paciente;
+  const path = url ;
+  console.log(path, url );
   try{
     const response = await request.sendGetRequest(path);
     console.log(response);

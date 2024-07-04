@@ -1,4 +1,4 @@
-import express from 'express'
+ import express from 'express'
 import fs from 'fs'
 import { MongoClient, ServerApiVersion } from 'mongodb'
 const app = express();
@@ -43,9 +43,9 @@ app.post('/', async (req, res) => {
   res.send('Turno añadido.');
 });
 
-app.get('/:paciente', async (req, res) => {
+app.get('/', async (req, res) => {
   console.log("ok");
-  const paciente = req.params.paciente;
+  // const paciente = req.params.paciente;
   const db = client.db("sample_guides");
   const coll = db.collection("turnos");
   try{
