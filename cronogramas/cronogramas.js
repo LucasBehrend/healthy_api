@@ -30,6 +30,7 @@ const port = 6000;
 // Define una ruta para la URL raíz ("/") con método POST
 app.post('/', async (req, res) => {
   let data = req.body;
+  console.log("data: ", data);
   try {
     await client.connect();
     const db = client.db("sample_guides");

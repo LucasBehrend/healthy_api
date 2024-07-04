@@ -23,7 +23,7 @@ const url =  process.env.CRONOGRAMA;
 app.post('/', async (req, res) => {
   let turnos = [];
   let data = req.body;
-  console.log(data);
+  console.log("post", data);
   turnos.push({paciente: turno.paciente,medico: turno.medico, fecha: turno.fecha, hora: turno.hora});
 
   const options = request.options(url, "", "POST", {"Content-Type": "application/json"})
@@ -31,7 +31,7 @@ app.post('/', async (req, res) => {
   
   res.status(200);
   console.log("esto es 2", response);
-  res.send(response);
+  return res.send(response);
 });
 // endpoint get para recibir turnos, enviar parametros en la ruta 
 app.get('/turnos/:paciente', async (req,res) => {
@@ -42,7 +42,7 @@ app.get('/turnos/:paciente', async (req,res) => {
   try{
     const response = await request.sendGetRequest(path);
     console.log(response);
-    res.send(response);
+    return res.send(response);
   }
   catch (error){
     console.log(error.message);

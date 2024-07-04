@@ -25,7 +25,7 @@ app.post('/turnos', async (req, res) => {
         const options = request.options(url, "POST", {"Content-Type": "application/json"})
         const response = await request.sendPostRequest(req.body.turnos, options);
         res.status(200);
-        res.send(response);
+        return res.send(response);
     }
     catch (error) {
         console.error('Error al procesar la solicitud:', error);
@@ -38,7 +38,7 @@ app.post('/ejemplo', async (req,res) => {
         const url = process.env.CONEXION_EJEMPLO;
         const options = request.options(url, "POST", {"Content-Type": "application/json"});
         const response = await request.sendPostRequest(receivedData, options);
-        res.send(response).status(200);
+        return res.send(response).status(200);
     }catch(error){
         console.error('Error al procesar la solicitud:', error);
         res.status(500).send('Error en el servidor');
@@ -53,7 +53,7 @@ app.get('/turnos/:paciente', async (req, res) => {
     console.log(path);
     try{
         const response = await request.sendGetRequest(path);
-        res.send(response);
+        return res.send(response);
     }
     catch (error){
         console.log(error.message);
