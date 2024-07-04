@@ -2,10 +2,10 @@ POST http://healthy-back.vercel.app/turnos http/1.1
 Content-Type: application/json
 
 {
-        "paciente": "Lucas2",
-        "medico": "jose",
-        "fecha": "24-01-2023",
-        "hora": "16:00"
+    "paciente": "Lucas2",
+    "medico": "jose",
+    "fecha": "24-01-2023",
+    "hora": "16:00"
         
 }   
 
@@ -13,7 +13,9 @@ Content-Type: application/json
 ###
 GET https://main-lahv.onrender.com
 ### 
-GET http://healthy-back.vercel.app/turnos/Lucas 
+GET http://localhost:3000/turnos/Lucas 
+### 
+GET http://healthy-back.vercel.app/turnos/Lucas  
 ###
 GET http://main-lahv.onrender.com/turnos/Lucas
 ###

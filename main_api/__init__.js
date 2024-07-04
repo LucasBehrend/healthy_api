@@ -5,15 +5,15 @@ import cors from 'cors';
 
 dotenv.config();
 const app = express();
-app.use(cors());
-// app.set("trust proxy", 1);
-// {
-//     origin: "*",
-//     methods: ['POST', 'PUT', 'GET', 'DELETE', 'OPTIONS', 'HEAD'],
-//     credentials: true,
-//     allowedHeaders: '*'
+app.use(cors({
+    origin: "*",
+    methods: ['POST', 'PUT', 'GET', 'DELETE', 'OPTIONS', 'HEAD'],
+    credentials: true,
+    allowedHeaders: '*'
     
-// }
+}));
+// app.set("trust proxy", 1);
+
 const port = 3000;
 const request = new requests();
 console.log("init");
