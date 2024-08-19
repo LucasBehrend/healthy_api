@@ -43,3 +43,21 @@ Content-Type: application/json
     "hora": "16:00"
         
 }   
+###
+POST http://localhost:3000/electrocardiograma
+Content-Type: application/json
+
+{
+    "nombre": "Lucas",
+    "apellido": "Behrend", 
+    "edad": "23",
+    "dni": "23343232",
+    "sexo": "masculino",
+    "peso": "80",
+    "altura": "180",
+    "hta": "si",
+    "diabetes": "tipo 1",
+    "dislipemia": "si",
+    "fumador": "si"
+
+}

@@ -39,9 +39,9 @@ services:
     startCommand: node --env-file=remote.env ./ejemplo_api/ejemplo.js
     branch: master
   - type: web
-    name: conexion_hemec
+    name: conexion_hamec
     runtime: node
     plan: free
     buildCommand: npm install
-    startCommand: node --env-file=remote.env ./conexion_hemec/conexion_hemec.js
+    startCommand: node --env-file=remote.env ./conexion_hamec/conexion_hamec.js
     branch: master
