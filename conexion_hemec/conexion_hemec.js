@@ -45,6 +45,16 @@ IMS (const imc = peso / ((altura / 100) * (altura / 100));
 )
 */
 
+function check_sexo(sexo){
+    if(sexo.toLowerCase()[0]== 'm'){
+        return ('sexo', 'M');
+    }    
+    else{
+        return('sexo', 'F');
+    }
+}
+
+
 
 const port = 7000;
 
