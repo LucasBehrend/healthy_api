@@ -9,7 +9,7 @@ $allCommands = @{
     cronogramas = 'node --env-file=local.env ./cronogramas/cronogramas.js'
     ejemplo = 'node --env-file=local.env ./ejemplo_api/ejemplo.js'
     main = 'node --env-file=local.env ./main_api/__init__.js'
-    conexion_hemec = 'node --env-file=local.env ./conexion_hamec/conexion_hamec.js'
+    conexion_hamec = 'node --env-file=local.env ./conexion_hamec/conexion_hamec.js'
 }
 
 if ($scripts -contains "all") {

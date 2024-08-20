@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subir Archivo y Datos Personales</title>
+</head>
+<body>
+    <h1>Subir Archivo y Completar Formulario</h1>
+
+    <form id="dataForm" enctype="multipart/form-data">
+        <!-- Campos del formulario -->
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" value="Lucas" required><br>
+
+        <label for="apellido">Apellido:</label>
+        <input type="text" id="apellido" name="apellido" value="Behrend" required><br>
+
+        <label for="edad">Edad:</label>
+        <input type="number" id="edad" name="edad" value="23" required><br>
+
+        <label for="dni">DNI:</label>
+        <input type="text" id="dni" name="dni" value="23343232" required><br>
+
+        <label for="sexo">Sexo:</label>
+        <input type="text" id="sexo" name="sexo" value="masculino" required><br>
+
+        <label for="peso">Peso (kg):</label>
+        <input type="number" id="peso" name="peso" value="80" required><br>
+
+        <label for="altura">Altura (cm):</label>
+        <input type="number" id="altura" name="altura" value="180" required><br>
+
+        <label for="hta">HTA:</label>
+        <input type="text" id="hta" name="hta" value="si" required><br>
+
+        <label for="diabetes">Diabetes:</label>
+        <input type="text" id="diabetes" name="diabetes" value="tipo 1" required><br>
+
+        <label for="dislipemia">Dislipemia:</label>
+        <input type="text" id="dislipemia" name="dislipemia" value="si" required><br>
+
+        <label for="fumador">Fumador:</label>
+        <input type="text" id="fumador" name="fumador" value="si" required><br>
+
+        <label for="creatinina">Creatinina (mg/dL):</label>
+        <input type="number" id="creatinina" name="creatinina" step="0.01" value = "1" required><br><br>
+
+        <label for="fileInput">Archivo:</label>
+        <input type="file" id="fileInput" name="file" required><br><br>
+
+        <button type="submit">Enviar</button>
+    </form>
+
+    <!-- Contenedor para mostrar la respuesta -->
+    <h2>Respuesta del Servidor:</h2>
+    <pre id="responseOutput"></pre>
+
+    <script>
+        document.getElementById('dataForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const formData = new FormData(this);
+
+            fetch('http://localhost:7000', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Mostrar la respuesta del servidor en formato JSON
+                document.getElementById('responseOutput').textContent = JSON.stringify(data, null, 2);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('responseOutput').textContent = 'Error al enviar los datos';
+            });
+        });
+    </script>
+</body>
+</html>

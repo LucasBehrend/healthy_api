@@ -50,73 +50,73 @@ IMS (const imc = peso / ((altura / 100) * (altura / 100));
 
 function check_sexo(sexo){
     if(sexo.toLowerCase()[0]== 'm'){
-        return 'sexo', 'M';
+        return ['sexo', 'M'];
     }    
     else{
-        return('sexo', 'F');
+        return ['sexo', 'F'];
     }
 }
 
 function check_hta (hta){
     if(hta.toLowerCase()[0] == 's'){
-        return ('hta', 'true');
+        return ['hta', 'true'];
     }
     else{
-        return ('hta', 'false');
+        return ['hta', 'false'];
     }
 }
 
 function check_diabetes(diabetes){
     if(diabetes[diabetes.length - 1] == '1'){
-        return ('diabetes', 'Tipo 1');
+        return ['diabetes', 'Tipo 1'];
     }
     else if (diabetes[diabetes.length - 1] == '2'){
-        return ('diabetes', 'Tipo 2');
+        return ['diabetes', 'Tipo 2'];
     }
     else {
-        return ('diabetes', 'No');
+        return ['diabetes', 'No'];
     }
 }
 
 function check_dislipemia(dislipemia){
     if (dislipemia.toLowerCase()[0] == 's'){
-        return ('dislipemia', 'true');
+        return ['dislipemia', 'true'];
     }
     else{
-        return ('dislipemia', 'false');
+        return ['dislipemia', 'false'];
     }
 }
 
 function check_fumador (fumador){
     if (fumador.toLowerCase()[0] == 's'){
-        return ('fumador', 'Si');
+        return ['fumador', 'Si'];
     }
     else if (fumador.toLowerCase()== 'ex'){
-        return ('fumador', 'Ex');
+        return ['fumador', 'Ex'];
     }
     else{
-        return('fumador', 'No');
+        return ['fumador', 'No'];
     }
 }
 
 function check_imc(imc){
     if (imc <= 18.5) {
-        return('obesidad', 'Bajo');
+        return ['obesidad', 'Bajo'];
     }
     else if (imc <= 24.9) {
-        return('obesidad', 'Normal');
+        return ['obesidad', 'Normal'];
     }
     else if (imc <= 29.9) {
-        return('obesidad', 'Sobrepeso');
+        return ['obesidad', 'Sobrepeso'];
     }
     else if (imc <= 34.9) {
-        return('obesidad', 'Obesidad I');
+        return ['obesidad', 'Obesidad I'];
     }
     else if (imc <= 39.9) {
-        return('obesidad', 'Obesidad II');
+        return ['obesidad', 'Obesidad II'];
     }
     else {
-        return('obesidad', 'Obesidad III');
+        return ['obesidad', 'Obesidad III'];
     }
 }
 
@@ -127,33 +127,39 @@ const port = 7000;
 app.post('/', upload.single('file'), async (req, res) => {
     console.log("hoasoddasas");
     const url =  "https://hamec.vercel.app/";
-    // const file = req.file;
-    // if (!file) {
-    //     return res.status(400).send('No file uploaded.');
-    // }
+    const file = req.file;
+    if (!file) {
+        return res.status(400).send('No file uploaded.');
+    }
     const body = req.body;
     const options = request.options(url, "ejemplo", "POST", {"Content-Type": "multipart/form-data"})
     const imc = body.peso / ((body.altura / 100) * (body.altura / 100));
+    const sexo = check_sexo(body.sexo);
+    const hta = check_hta(body.hta);
+    const diabetes = check_diabetes(body.diabetes);
+    const dislipemia = check_dislipemia(body.dislipemia);
+    const fumador = check_fumador(body.fumador);
+    const checked_imc = check_imc(imc);
     let formData = new FormData();
-    // formData.set('file', file);
+    formData.set('file', file.originalname);
     formData.set('nombre', body.nombre);
     formData.set('apellido', body.apellido);
     formData.set('edad', body.edad);
     formData.set('dni', body.dni);
-    formData.set(check_sexo(body.sexo));
+    formData.set(sexo[0], sexo[1]);
     formData.set('peso', body.peso);
     formData.set('altura', body.altura);
-    formData.set(check_hta(body.hta));
-    formData.set(check_diabetes(body.diabetes));
-    formData.set(check_dislipemia(body.dislipemia));
-    formData.set(check_fumador(body.fumador));
+    formData.set(hta[0], hta[1]);
+    formData.set(diabetes[0], diabetes[1]);
+    formData.set(dislipemia[0], dislipemia[1]);
+    formData.set(fumador[0], fumador[1]);
     formData.set('creatinina', body.creatinina);
     formData.set('imc', imc);
-    formData.set(check_imc(imc));
+    formData.set(checked_imc[0], checked_imc[1]);
     res.status(200);
     console.log(formData);
     // const response = await request.sendPostRequest(formData, options);
-    res.send(response);
+    res.send(formData);
 });
 
 
