@@ -76,12 +76,12 @@ app.post('/electrocardiograma', async (req,res) => {
 })
 app.post('/', async (req,res) => {
     try{
-        let url;
+        // let url;
         const tipo = req.body.tipo;
-        switch (tipo){
-            case "electrocardiograma": url = process.env.CONEXION_HEMEC;
-            case "turnos": url = process.env.CONEXION_CRONOGRAMA;
-        }
+        // switch (tipo){
+        //     case "electrocardiograma": url = process.env.CONEXION_HEMEC;
+        //     case "turnos": url = process.env.CONEXION_CRONOGRAMA;
+        // }
         const url = process.env.CONEXION_HEMEC;
         const options = request.options(url, "POST", {"Content-Type": "application/json"});
         const response = await request.sendPostRequest(receivedData, options);
