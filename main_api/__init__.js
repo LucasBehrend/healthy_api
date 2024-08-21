@@ -91,7 +91,9 @@ app.post('/', async (req,res) => {
         res.status(500).send('Error en el servidor');
     }
 })
-
+app.post('/sz', async (req,res) => {
+    res.json("electrocardiograma");
+})
 
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}/`);
