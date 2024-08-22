@@ -125,6 +125,7 @@ function check_imc(imc){
 const port = 7000;
 
 app.post('/', upload.single('file'), async (req, res) => {
+    return res.send("electrocardiograma");
     console.log("hoasoddasas");
     const url =  "https://hamec.vercel.app/api/estudio";
     const file = req.file;
@@ -136,7 +137,7 @@ app.post('/', upload.single('file'), async (req, res) => {
     const imc = body.peso / ((body.altura / 100) * (body.altura / 100));
     const sexo = check_sexo(body.sexo);
     const hta = check_hta(body.hta);
-    const diabetes = check_diabetes(body.diabetes);
+    const diabetes = check_diabetes(body.diabetes); 
     const dislipemia = check_dislipemia(body.dislipemia);
     const fumador = check_fumador(body.fumador);
     const checked_imc = check_imc(imc);
