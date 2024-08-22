@@ -125,16 +125,17 @@ function check_imc(imc){
 const port = 7000;
 
 app.post('/', upload.single('file'), async (req, res) => {
-    return res.send("electrocardiograma");
     console.log("hoasoddasas");
-    return res.send("formData");
     const url =  "https://hamec.vercel.app/api/estudio";
     const file = req.file;
     if (!file) {
         return res.status(400).send('No file uploaded.');
     }
     const body = req.body;
-    const options = request.options(url, "ejemplo", "POST", {"Content-Type": "multipart/form-data"})
+    const options = {
+        hostname: url,
+        method: 'POST'
+    }
     const imc = body.peso / ((body.altura / 100) * (body.altura / 100));
     const sexo = check_sexo(body.sexo);
     const hta = check_hta(body.hta);
@@ -144,7 +145,7 @@ app.post('/', upload.single('file'), async (req, res) => {
     const checked_imc = check_imc(imc);
     let formData = new FormData();
     formData.set('file', file.originalname);
-    formData.set('nombre', body.nombre);
+    formData.set('nombre', body.name);
     formData.set('apellido', body.apellido);
     formData.set('edad', body.edad);
     formData.set('dni', body.dni);
@@ -158,9 +159,10 @@ app.post('/', upload.single('file'), async (req, res) => {
     formData.set('creatinina', body.creatinina);
     formData.set('imc', imc);
     formData.set(checked_imc[0], checked_imc[1]);
-    res.status(200);
     console.log(formData);
     const response = await request.sendPostRequest(formData, options);
+    res.status(200);
+    console.log(response);
 });
 
 
