@@ -62,7 +62,7 @@
 
             const formData = new FormData(this);
 
-            fetch('http://localhost:3001/electrocardiograma', {
+            fetch('http://localhost:7000', {
                 method: 'POST',
                 body: formData
             })
@@ -71,7 +71,10 @@
                 // Mostrar la respuesta del servidor en formato JSON
                 document.getElementById('responseOutput').textContent = JSON.stringify(data, null, 2);
             })
-            
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('responseOutput').textContent = 'Error al enviar los datos';
+            });
         });
     </script>
 </body>
