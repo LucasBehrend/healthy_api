@@ -127,6 +127,7 @@ const port = 7000;
 app.post('/', upload.single('file'), async (req, res) => {
     return res.send("electrocardiograma");
     console.log("hoasoddasas");
+    return res.send("formData");
     const url =  "https://hamec.vercel.app/api/estudio";
     const file = req.file;
     if (!file) {
@@ -160,7 +161,6 @@ app.post('/', upload.single('file'), async (req, res) => {
     res.status(200);
     console.log(formData);
     const response = await request.sendPostRequest(formData, options);
-    res.send(formData);
 });
 
 
