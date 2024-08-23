@@ -1,7 +1,9 @@
 import express from 'express';
 import Requests from '../main_api/receive_and_send_express.js';
 import multer from 'multer';
-
+import FormData from 'form-data';
+import fetch from 'node-fetch';
+import streamifier from 'streamifier';
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
 const app = express();
@@ -142,77 +144,78 @@ app.post('/', upload.single('file'), async (req, res) => {
     const diabetes = check_diabetes(body.diabetes); 
     const dislipemia = check_dislipemia(body.dislipemia);
     const fumador = check_fumador(body.fumador);
-    
+    const fileStream = streamifier.createReadStream(file.buffer);
+
     // const checked_imc = check_imc(imc);
     let form = new FormData();
-    form.set('file', file);
-    form.set('nombre', body.nombre);
-    form.set('apellido', body.apellido);
-    //form.set('fechaNacimiento', '1999-09-09');
-    form.set('edad', body.edad);
-    form.set('dni', body.dni);
-    if (sexo === 'Masculino' || sexo === 'M' || sexo === 'm' || sexo === 'masculino') {
-        form.set('sexo', 'M');
+    form.append('file', fileStream);
+    form.append('nombre', body.nombre);
+    form.append('apellido', body.apellido);
+    //form.append('fechaNacimiento', '1999-09-09');
+    form.append('edad', body.edad);
+    form.append('dni', body.dni);
+    if (body.sexo === 'Masculino' || body.sexo === 'M' || body.sexo === 'm' || body.sexo === 'masculino') {
+        form.append('sexo', 'M');
     }
     else {
-        form.set('sexo', 'F');
+        form.append('sexo', 'F');
     }
-    form.set('peso', body.peso);
-    form.set('altura', body.altura);
-    //form.set('imc', '30');
+    form.append('peso', body.peso);
+    form.append('altura', body.altura);
+    //form.append('imc', '30');
     if (body.hta === 'Si' || body.hta === 's' || body.hta === 'S' || body.hta === 'si') {
-        form.set('hta', 'true');
+        form.append('hta', 'true');
     }
     else {
-        form.set('hta', 'false');
+        form.append('hta', 'false');
     }
-    //form.set('obesidad', 'Normal');
+    //form.append('obesidad', 'Normal');
     if (body.diabetes === '1' || body.diabetes === 'tipo 1' || body.diabetes === 'Tipo 1' || body.diabetes === 'tipo1' || body.diabetes === 'Tipo1' || body.diabetes === 'T1' || body.diabetes === 't1') {
-        form.set('diabetes', 'Tipo 1');
+        form.append('diabetes', 'Tipo 1');
     }
     else if (body.diabetes === '2' || body.diabetes === 'tipo 2' || body.diabetes === 'Tipo 2' || body.diabetes === 'tipo2' || body.diabetes === 'Tipo2' || body.diabetes === 'T2' || body.diabetes === 't2') {
-        form.set('diabetes', 'Tipo 2');
+        form.append('diabetes', 'Tipo 2');
     }
     else {
-        form.set('diabetes', 'No');
+        form.append('diabetes', 'No');
     }
     if (body.dislipemia === 'Si' || body.dislipemia === 's' || body.dislipemia === 'S' || body.dislipemia === 'si') {
-        form.set('dislipemia', 'true');
+        form.append('dislipemia', 'true');
     }
     else {
-        form.set('dislipemia', 'false');
+        form.append('dislipemia', 'false');
     }
     if (body.fumador === 'Si' || body.fumador === 's' || body.fumador === 'S' || body.fumador === 'si') {
-        form.set('fumador', 'Si');
+        form.append('fumador', 'Si');
     }
     else if (body.fumador === 'Ex' || body.fumador === 'ex' || body.fumador === 'EX') {
-        form.set('fumador', 'Ex');
+        form.append('fumador', 'Ex');
     }
     else {
-        form.set('fumador', 'No');
+        form.append('fumador', 'No');
     }
-    form.set('creatinina', body.creatinina);
+    form.append('creatinina', body.creatinina);
 
     const imc = body.peso / ((body.altura / 100) * (body.altura / 100));
-    form.set('imc', imc);
+    form.append('imc', imc);
 
     if (imc <= 18.5) {
-        form.set('obesidad', 'Bajo');
+        form.append('obesidad', 'Bajo');
     }
     else if (imc <= 24.9) {
-        form.set('obesidad', 'Normal');
+        form.append('obesidad', 'Normal');
     }
     else if (imc <= 29.9) {
-        form.set('obesidad', 'Sobrepeso');
+        form.append('obesidad', 'Sobrepeso');
     }
     else if (imc <= 34.9) {
-        form.set('obesidad', 'Obesidad I');
+        form.append('obesidad', 'Obesidad I');
     }
     else if (imc <= 39.9) {
-        form.set('obesidad', 'Obesidad II');
+        form.append('obesidad', 'Obesidad II');
     }
     else {
-        form.set('obesidad', 'Obesidad III');
+        form.append('obesidad', 'Obesidad III');
     }
 
     // const imc = body.peso / ((body.altura / 100) * (body.altura / 100));
@@ -239,9 +242,15 @@ app.post('/', upload.single('file'), async (req, res) => {
     // formData.set('imc', imc);
     // formData.set(checked_imc[0], checked_imc[1]);
     console.log(form);
-    const response = await request.sendPostRequest(form, options);
+    const response = await fetch(url, {
+        method: 'POST',
+        body: form
+    }).catch(error => {
+        console.log("error", error);
+    }
+    );
     res.status(200);
-    console.log(response);
+    console.log("response", response);
 });
 
 
