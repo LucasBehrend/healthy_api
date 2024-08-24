@@ -45,6 +45,7 @@ app.post('/', async (req, res) => {
 
 app.get('/', async (req, res) => {
   console.log("ok");
+  await client.connect();
   // const paciente = req.params.paciente;
   const db = client.db("sample_guides");
   const coll = db.collection("turnos");

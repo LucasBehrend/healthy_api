@@ -14,7 +14,7 @@ app.use(cors({
 }));
 // app.set("trust proxy", 1);
 
-const port = 3000;
+const port = 3001;
 const request = new requests();
 console.log("init");
 app.use(express.json());
@@ -55,6 +55,7 @@ app.get('/turnos', async (req, res) => {
     console.log(path);
     try{
         const response = await request.sendGetRequest(path);
+        console.log(response);
         return res.send(response);
     }
     catch (error){
