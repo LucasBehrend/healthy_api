@@ -124,11 +124,11 @@ function check_imc(imc){
 
 
 
-const port = 7000;
+const port = 8000;
 
 app.post('/', upload.single('file'), async (req, res) => {
     console.log("hoasoddasas");
-    const url =  "https://hamec.vercel.app/api/estudio";
+    const url =  "https://hamec.vercel.app/api/estudio?id_institucion=1&id_usuario=1";
     const file = req.file;
     if (!file) {
         return res.status(400).send('No file uploaded.');
@@ -148,7 +148,7 @@ app.post('/', upload.single('file'), async (req, res) => {
 
     // const checked_imc = check_imc(imc);
     let form = new FormData();
-    form.append('file', fileStream);
+    form.append('file', JSON.stringify(fileStream));
     form.append('nombre', body.nombre);
     form.append('apellido', body.apellido);
     //form.append('fechaNacimiento', '1999-09-09');
@@ -218,33 +218,11 @@ app.post('/', upload.single('file'), async (req, res) => {
         form.append('obesidad', 'Obesidad III');
     }
 
-    // const imc = body.peso / ((body.altura / 100) * (body.altura / 100));
-    // const sexo = check_sexo(body.sexo);
-    // const hta = check_hta(body.hta);
-    // const diabetes = check_diabetes(body.diabetes); 
-    // const dislipemia = check_dislipemia(body.dislipemia);
-    // const fumador = check_fumador(body.fumador);
-    // const checked_imc = check_imc(imc);
-    // let formData = new FormData();
-    // formData.set('file', file.originalname);
-    // formData.set('nombre', body.name);
-    // formData.set('apellido', body.apellido);
-    // formData.set('edad', body.edad);
-    // formData.set('dni', body.dni);
-    // formData.set(sexo[0], sexo[1]);
-    // formData.set('peso', body.peso);
-    // formData.set('altura', body.altura);
-    // formData.set(hta[0], hta[1]);
-    // formData.set(diabetes[0], diabetes[1]);
-    // formData.set(dislipemia[0], dislipemia[1]);
-    // formData.set(fumador[0], fumador[1]);
-    // formData.set('creatinina', body.creatinina);
-    // formData.set('imc', imc);
-    // formData.set(checked_imc[0], checked_imc[1]);
     console.log(form);
+    console.log(url);
     const response = await fetch(url, {
         method: 'POST',
-        body: form
+        body: JSON.stringify(form)
     }).catch(error => {
         console.log("error", error);
     }
@@ -260,3 +238,26 @@ app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}/`);
 });
 export default app;
+        // const imc = body.peso / ((body.altura / 100) * (body.altura / 100));
+        // const sexo = check_sexo(body.sexo);
+        // const hta = check_hta(body.hta);
+        // const diabetes = check_diabetes(body.diabetes); 
+        // const dislipemia = check_dislipemia(body.dislipemia);
+        // const fumador = check_fumador(body.fumador);
+        // const checked_imc = check_imc(imc);
+        // let formData = new FormData();
+        // formData.set('file', file.originalname);
+        // formData.set('nombre', body.name);
+        // formData.set('apellido', body.apellido);
+        // formData.set('edad', body.edad);
+        // formData.set('dni', body.dni);
+        // formData.set(sexo[0], sexo[1]);
+        // formData.set('peso', body.peso);
+        // formData.set('altura', body.altura);
+        // formData.set(hta[0], hta[1]);
+        // formData.set(diabetes[0], diabetes[1]);
+        // formData.set(dislipemia[0], dislipemia[1]);
+        // formData.set(fumador[0], fumador[1]);
+        // formData.set('creatinina', body.creatinina);
+        // formData.set('imc', imc);
+        // formData.set(checked_imc[0], checked_imc[1]);
