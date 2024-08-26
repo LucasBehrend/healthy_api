@@ -222,6 +222,9 @@ app.post('/', upload.single('file'), async (req, res) => {
     console.log(url);
     const response = await fetch(url, {
         method: 'POST',
+        headers: {
+            'Content-Type': 'multipart/form-data',
+          },
         body: JSON.stringify(form)
     }).catch(error => {
         console.log("error", error);
