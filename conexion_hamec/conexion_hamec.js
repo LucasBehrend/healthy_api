@@ -4,6 +4,7 @@ import multer from 'multer';
 import FormData from 'form-data';
 import fetch from 'node-fetch';
 import streamifier from 'streamifier';
+import axios from 'axios';
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
 const app = express();
@@ -134,10 +135,7 @@ app.post('/', upload.single('file'), async (req, res) => {
         return res.status(400).send('No file uploaded.');
     }
     const body = req.body;
-    const options = {
-        hostname: url,
-        method: 'POST'
-    }
+
     // const imc = body.peso / ((body.altura / 100) * (body.altura / 100));
     const sexo = check_sexo(body.sexo);
     const hta = check_hta(body.hta);
@@ -148,7 +146,7 @@ app.post('/', upload.single('file'), async (req, res) => {
 
     // const checked_imc = check_imc(imc);
     let form = new FormData();
-    form.append('file', JSON.stringify(fileStream));
+    form.append('file', fileStream);
     form.append('nombre', body.nombre);
     form.append('apellido', body.apellido);
     //form.append('fechaNacimiento', '1999-09-09');
@@ -217,22 +215,21 @@ app.post('/', upload.single('file'), async (req, res) => {
     else {
         form.append('obesidad', 'Obesidad III');
     }
-
-    console.log(form);
-    console.log(url);
-    const response = await fetch(url, {
-        method: 'POST',
+    console.log("form",form);
+    const boundary = form.getBoundary();
+    try {
+      const response = await axios.post(url, form, {
         headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-        body: JSON.stringify(form)
-    }).catch(error => {
-        console.log("error", error);
+          'Content-Type': `multipart/form-data; boundary=${form._boundary}`,
+        },
+      });
+      const responseData = await response.json();
+      console.log('Response data:', responseData);
+    } catch (error) {
+      console.error('Error sending request:', error.message);
     }
-    );
-    res.status(200);
-    console.log("response", response);
 });
+
 
 
 
