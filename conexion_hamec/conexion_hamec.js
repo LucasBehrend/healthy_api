@@ -5,6 +5,7 @@ import FormData from 'form-data';
 import fetch from 'node-fetch';
 import streamifier from 'streamifier';
 import axios from 'axios';
+import { Readable } from 'stream';
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
 const app = express();
@@ -142,91 +143,100 @@ app.post('/', upload.single('file'), async (req, res) => {
     const diabetes = check_diabetes(body.diabetes); 
     const dislipemia = check_dislipemia(body.dislipemia);
     const fumador = check_fumador(body.fumador);
+    // const fileStream = new Readable({
+    //     read() {
+    //       this.push(file.buffer);
+    //       this.push(null);
+    //     },
+    //   });
     const fileStream = streamifier.createReadStream(file.buffer);
-
     // const checked_imc = check_imc(imc);
     let form = new FormData();
-    form.append('file', fileStream);
-    form.append('nombre', body.nombre);
-    form.append('apellido', body.apellido);
-    //form.append('fechaNacimiento', '1999-09-09');
-    form.append('edad', body.edad);
-    form.append('dni', body.dni);
+    form.set('file', req.file);
+    form.set('nombre', body.nombre);
+    form.set('apellido', body.apellido);
+    //form.set('fechaNacimiento', '1999-09-09');
+    form.set('edad', body.edad);
+    form.set('dni', body.dni);
     if (body.sexo === 'Masculino' || body.sexo === 'M' || body.sexo === 'm' || body.sexo === 'masculino') {
-        form.append('sexo', 'M');
+        form.set('sexo', 'M');
     }
     else {
-        form.append('sexo', 'F');
+        form.set('sexo', 'F');
     }
-    form.append('peso', body.peso);
-    form.append('altura', body.altura);
-    //form.append('imc', '30');
+    form.set('peso', body.peso);
+    form.set('altura', body.altura);
+    //form.set('imc', '30');
     if (body.hta === 'Si' || body.hta === 's' || body.hta === 'S' || body.hta === 'si') {
-        form.append('hta', 'true');
+        form.set('hta', 'true');
     }
     else {
-        form.append('hta', 'false');
+        form.set('hta', 'false');
     }
-    //form.append('obesidad', 'Normal');
+    //form.set('obesidad', 'Normal');
     if (body.diabetes === '1' || body.diabetes === 'tipo 1' || body.diabetes === 'Tipo 1' || body.diabetes === 'tipo1' || body.diabetes === 'Tipo1' || body.diabetes === 'T1' || body.diabetes === 't1') {
-        form.append('diabetes', 'Tipo 1');
+        form.set('diabetes', 'Tipo 1');
     }
     else if (body.diabetes === '2' || body.diabetes === 'tipo 2' || body.diabetes === 'Tipo 2' || body.diabetes === 'tipo2' || body.diabetes === 'Tipo2' || body.diabetes === 'T2' || body.diabetes === 't2') {
-        form.append('diabetes', 'Tipo 2');
+        form.set('diabetes', 'Tipo 2');
     }
     else {
-        form.append('diabetes', 'No');
+        form.set('diabetes', 'No');
     }
     if (body.dislipemia === 'Si' || body.dislipemia === 's' || body.dislipemia === 'S' || body.dislipemia === 'si') {
-        form.append('dislipemia', 'true');
+        form.set('dislipemia', 'true');
     }
     else {
-        form.append('dislipemia', 'false');
+        form.set('dislipemia', 'false');
     }
     if (body.fumador === 'Si' || body.fumador === 's' || body.fumador === 'S' || body.fumador === 'si') {
-        form.append('fumador', 'Si');
+        form.set('fumador', 'Si');
     }
     else if (body.fumador === 'Ex' || body.fumador === 'ex' || body.fumador === 'EX') {
-        form.append('fumador', 'Ex');
+        form.set('fumador', 'Ex');
     }
     else {
-        form.append('fumador', 'No');
+        form.set('fumador', 'No');
     }
-    form.append('creatinina', body.creatinina);
+    form.set('creatinina', body.creatinina);
 
     const imc = body.peso / ((body.altura / 100) * (body.altura / 100));
-    form.append('imc', imc);
+    form.set('imc', imc);
 
     if (imc <= 18.5) {
-        form.append('obesidad', 'Bajo');
+        form.set('obesidad', 'Bajo');
     }
     else if (imc <= 24.9) {
-        form.append('obesidad', 'Normal');
+        form.set('obesidad', 'Normal');
     }
     else if (imc <= 29.9) {
-        form.append('obesidad', 'Sobrepeso');
+        form.set('obesidad', 'Sobrepeso');
     }
     else if (imc <= 34.9) {
-        form.append('obesidad', 'Obesidad I');
+        form.set('obesidad', 'Obesidad I');
     }
     else if (imc <= 39.9) {
-        form.append('obesidad', 'Obesidad II');
+        form.set('obesidad', 'Obesidad II');
     }
     else {
-        form.append('obesidad', 'Obesidad III');
+        form.set('obesidad', 'Obesidad III');
     }
     console.log("form",form);
     const boundary = form.getBoundary();
     try {
-      const response = await axios.post(url, form, {
+      const response = await axios.post(url, form,
+        {
         headers: {
           'Content-Type': `multipart/form-data; boundary=${form._boundary}`,
         },
-      });
+        }
+    );
       const responseData = await response.json();
       console.log('Response data:', responseData);
+      res.send(responseData);
     } catch (error) {
       console.error('Error sending request:', error.message);
+      res.send(error.message);
     }
 });
 
