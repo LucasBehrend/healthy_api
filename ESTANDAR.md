@@ -42,7 +42,11 @@ En caso de error, resultado debe ser null, en caso contrario, error debe ser nul
 ## 3. Manejo de errores
 ### Errores HTTP:
 
-- Usar códigos de estado HTTP apropiados (200 OK, 400 Bad Request, 500 Internal Server Error, etc.).
+- Usar códigos de estado HTTP apropiados:
+    - 200: Solicitud exitosa.
+    - 400: Error en la request.
+    - 500: Error en el servidor.
+
 
 - Incluir detalles del error en el cuerpo de la respuesta en un formato JSON.
 
@@ -56,3 +60,4 @@ Si se llegara a tener que envíar un archivo, se enviará el buffer del archivo 
 ```
 
 ## 5. Seguridad
+- Todas las solicitudes deben estar autenticadas utilizando métodos seguros (JWT).
