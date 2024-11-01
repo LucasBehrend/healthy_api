@@ -2,7 +2,8 @@ import express from "express";
 import requests from "./receive_and_send_express.js";
 import dotenv from 'dotenv';
 import cors from 'cors';
-
+import multer from 'multer';
+import axios from 'axios';
 dotenv.config();
 const app = express();
 app.use(cors({
@@ -17,6 +18,11 @@ const port = 3001;
 const request = new requests();
 console.log("init");
 app.use(express.json());
+const upload = multer({ 
+    storage: multer.memoryStorage(), // Usando memoryStorage para almacenar archivos en la memoria temporalmente
+    limits: { fileSize: 100 * 1024 * 1024},
+    json: true
+});
 async function turnos(req, res){
     let turnos = [];
     let data = req.body;
@@ -232,6 +238,21 @@ app.post('/electrocardiograma', async (req,res) => {
 })
 app.post('/sz', async (req,res) => {
     res.json("electrocardiograma");
+})
+app.post('/iacm', upload.single('file'), async (req, res) => {
+    try{
+        const url = 'https://webiacm-five.vercel.app/upload-image';
+        const file = req.file;
+        let formData = new FormData();
+        formData.append('file', file);
+        const response = await axios.post(url, formData);
+        res.json({response: response});
+    }
+    catch(error){
+        console.error('Error al procesar la solicitud:', error);
+        res.status(500).json({message: 'Error en el servidor'});
+    }
+
 })
 
 app.listen(port, () => {

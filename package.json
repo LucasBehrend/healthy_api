@@ -5,7 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon main_api/__init__.js"
   },
   "author": "",
   "license": "ISC",
@@ -19,7 +20,7 @@
     "mongodb": "^6.7.0",
     "multer": "^1.4.5-lts.1",
     "node-fetch": "^3.3.2",
-    "nodemon": "^3.1.4",
+    "nodemon": "^3.1.7",
     "stream": "^0.0.3",
     "streamifier": "^0.1.1",
     "vercel": "^34.2.3"
