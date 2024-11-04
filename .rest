@@ -8,7 +8,27 @@ Content-Type: application/json
     "hora": "16:00"
         
 }   
+###
+POST https://main-lahv.onrender.com http/1.1
+Content-Type: application/json
 
+{
+    "paciente": "Lucas7",
+    "medico": "jose",
+    "fecha": "24-01-2023",
+    "hora": "16:00"
+        
+}   
+###
+POST http://localhost:3001/turnos
+Content-Type: application/json
+
+{
+    "paciente": "Lucas",
+    "medico": "jose",
+    "fecha": "24-01-2023",
+    "hora": "16:00"
+}
 
 ###
 GET https://main-lahv.onrender.com

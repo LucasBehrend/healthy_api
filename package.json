@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon main_api/__init__.js"
+    "dev": "nodemon --env-file=local.env ./main_api/__init__.js"
   },
   "author": "",
   "license": "ISC",

@@ -30,15 +30,18 @@ const port = 6000;
 // Define una ruta para la URL raíz ("/") con método POST
 app.post('/', async (req, res) => {
   let data = req.body;
-  console.log("data: ", data);
+  let list = [];
+  list.push(data);
+  console.log("data: ", list);
   try {
     await client.connect();
     const db = client.db("sample_guides");
     const coll = db.collection("turnos");
-    await coll.insertMany(data);
+    await coll.insertMany(list);
   }
   catch (error){
     console.log("Error: ", error.message);
+    return res.status(500).send("Error", error.message);
   }
   res.send('Turno añadido.');
 });

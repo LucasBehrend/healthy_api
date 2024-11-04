@@ -179,7 +179,7 @@ app.post('/', async (req,res) => {
 app.post('/turnos', async (req, res) => {
     //Arreglar
     try {
-        const url = process.env.CONEXION_CRONOGRAMA;
+        const url = process.env.CRONOGRAMA;
         console.log(url);
         const options = request.options(url, "POST", {"Content-Type": "application/json"})
         console.log(req.body);
