@@ -241,11 +241,40 @@ app.post('/sz', async (req,res) => {
 })
 app.post('/iacm', upload.single('file'), async (req, res) => {
     try{
-        const url = 'https://webiacm-five.vercel.app/upload-image';
+
+        console.log("jkasfkjas");
+        const url = 'http://localhost:8000/upload-image/';
         const file = req.file;
+        console.log(req.file);
+        console.log(Object.keys(file));
+        let formData = new FormData();
+        formData.append('file', file.buffer);
+        const response = await fetch(url, {
+            method: 'POST', 
+            body: formData
+        });
+        res.json({response: response});
+    }
+    catch(error){
+        console.error('Error al procesar la solicitud:', error);
+        res.status(500).json({message: 'Error en el servidor'});
+    }
+
+})
+app.post('/iacm2', async (req, res) => {
+    try{
+
+        console.log(req);
+        const url = 'http://localhost:8000/upload-image/';
+        const file = req.file;
+        console.log(req.file);
+        console.log(Object.keys(file));
         let formData = new FormData();
         formData.append('file', file);
-        const response = await axios.post(url, formData);
+        const response = await fetch(url, {
+            method: 'POST', 
+            body: formData
+        });
         res.json({response: response});
     }
     catch(error){

@@ -9,12 +9,12 @@ Content-Type: application/json
         
 }   
 ###
-POST https://main-lahv.onrender.com http/1.1
+POST https://main-lahv.onrender.com/turnos http/1.1
 Content-Type: application/json
 
 {
-    "paciente": "Lucas7",
-    "medico": "jose",
+    "paciente": "bgsfbjvnjlfdnjlfsdnlfadnl",
+    "medico": "lnaflnkaflnkaflnkaffankl",
     "fecha": "24-01-2023",
     "hora": "16:00"
         
@@ -24,14 +24,14 @@ POST http://localhost:3001/turnos
 Content-Type: application/json
 
 {
-    "paciente": "Lucas",
-    "medico": "jose",
+    "paciente": "kakasjdasjksa",
+    "medico": "daskjasddasjk",
     "fecha": "24-01-2023",
     "hora": "16:00"
 }
 
 ###
-GET https://main-lahv.onrender.com
+GET https://main-lahv.onrender.com/turnos
 ### 
 GET http://localhost:3000/turnos/Lucas 
 ### 

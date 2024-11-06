@@ -18,10 +18,11 @@
             
             const fileInput = document.getElementById('fileInput');
             if (!fileInput.files.length) {
-                alert("Por favor, selecciona una foto.");
+                console.log("Por favor, selecciona una foto.");
                 return;
             }
-
+            console.log(fileInput.files[0]);
+            console.log(Object.keys(fileInput.files[0]));
             const formData = new FormData();
             formData.append('file', fileInput.files[0]);
 
@@ -32,12 +33,12 @@
                 });
 
                 if (response.ok) {
-                    alert("Foto subida exitosamente");
+                    console.log("Foto subida exitosamente");
                 } else {
-                    alert("Error al subir la foto");
+                    console.log("Error al subir la foto");
                 }
             } catch (error) {
-                alert("Hubo un error en la conexión");
+                console.log("Hubo un error en la conexión");
             }
         });
     </script>
