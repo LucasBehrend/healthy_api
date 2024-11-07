@@ -4,6 +4,10 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import multer from 'multer';
 import axios from 'axios';
+import FormData from 'form-data';
+import { Blob } from 'fetch-blob';
+import fs from 'fs';
+
 dotenv.config();
 const app = express();
 app.use(cors({
@@ -18,11 +22,22 @@ const port = 3001;
 const request = new requests();
 console.log("init");
 app.use(express.json());
-const upload = multer({ 
-    storage: multer.memoryStorage(), // Usando memoryStorage para almacenar archivos en la memoria temporalmente
-    limits: { fileSize: 100 * 1024 * 1024},
-    json: true
-});
+// const upload = multer({ 
+//     storage: multer.memoryStorage(), // Usando memoryStorage para almacenar archivos en la memoria temporalmente
+//     limits: { fileSize: 100 * 1024 * 1024},
+//     json: true
+// });
+// const storage = multer.diskStorage({
+//     destination: function (req, file, cb) {
+//       cb(null, './uploads')
+//     },
+//     filename: function (req, file, cb) {
+//       const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+//       cb(null, file.fieldname + '-' + uniqueSuffix)
+//     }
+//   })
+const upload = multer({ dest: 'uploads' })
+// const upload = multer({ storage: storage })
 async function turnos(req, res){
     let turnos = [];
     let data = req.body;
@@ -241,18 +256,27 @@ app.post('/sz', async (req,res) => {
 })
 app.post('/iacm', upload.single('file'), async (req, res) => {
     try{
-
         console.log("jkasfkjas");
         const url = 'http://localhost:8000/upload-image/';
         const file = req.file;
         console.log(req.file);
         console.log(Object.keys(file));
         let formData = new FormData();
-        formData.append('file', file.buffer);
+        // const blob = new Blob([file.buffer], { type: file.mimetype });
+        let path = `uploads\\${file.filename}`;
+        console.log(fs.createReadStream(path));
+        formData.append('file', fs.createReadStream(path), file.name);
+
+        // formData.append('file', file.buffer, file.originalname);
         const response = await fetch(url, {
             method: 'POST', 
+            headers: {
+                // 'Accept': 'application/json, application/xml, form-data, text/plain, text/html, *.*,'
+                'Content-Type': "multipart/form-data"
+            },
             body: formData
         });
+        console.log(response);
         res.json({response: response});
     }
     catch(error){
