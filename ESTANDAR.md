@@ -13,6 +13,28 @@ La API debe habilitar Cross-Origin Resource Sharing (CORS) para las siguientes I
     54.191.253.12
     44.226.122.3
 
+Ejemplo de request:
+```json
+POST https://main-lahv.onrender.com/config
+Content-Type: application/json
+
+{
+    "api_url": "https://api.tuapi.com",
+    "auth": {
+        "type": "Bearer",
+        "token": "tu_bearer_token"
+    }
+}
+
+```
+Ejemplo de response:
+```json
+{
+    "status": "Configuración inicial completada",
+    "auth_method": "Bearer"
+}
+
+```
 ## 2. Rutas y Endpoints Obligatorios
 
 ### Ruta GET (/healthy):
@@ -50,6 +72,19 @@ En caso de error, resultado debe ser null, en caso contrario, error debe ser nul
 
 - Incluir detalles del error en el cuerpo de la respuesta en un formato JSON.
 
+```json
+POST https://main-lahv.onrender.com/healthy
+Content-Type: application/json
+Authorization: Bearer tu_bearer_token
+
+{
+    "dato1": "valor1",
+    "dato2": "texto_incorrecto",  // Aquí debería ser un número entero
+    "dato3": true
+}
+
+```
+
 ## 4. Manejo de archivos
 Si se llegara a tener que envíar un archivo, se enviará el buffer del archivo en un form-data de la siguiente manera:
 
@@ -61,3 +96,15 @@ Si se llegara a tener que envíar un archivo, se enviará el buffer del archivo 
 
 ## 5. Seguridad
 - Todas las solicitudes deben estar autenticadas utilizando métodos seguros (JWT).
+```json
+POST https://main-lahv.onrender.com/healthy
+Content-Type: application/json
+Authorization: Bearer tu_jwt_token
+
+{
+    "dato1": "valor1",
+    "dato2": 123,
+    "dato3": true
+}
+
+```
